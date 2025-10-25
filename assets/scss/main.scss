@@ -1,0 +1,15 @@
+// Casino Theme Main Styles
+// ========================
+
+@use "sass:color";
+
+// Import all partials
+@import 'variables';
+@import 'base';
+@import 'layout';
+@import 'components/hero';
+@import 'components';
+@import 'components/casino-hotels-table';
+@import 'utilities';
+@import 'responsive';
+

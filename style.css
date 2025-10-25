@@ -1,0 +1,15 @@
+/*
+Theme Name: Casino
+Description: Production-ready WordPress theme with Webpack 5, Sass, and modern build tools
+Version: 1.0.0
+Author: Pawel Dabrowa
+Text Domain: casino
+License: GPL v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Tags: responsive, modern, webpack, sass
+*/
+
+/* 
+ * Main CSS is built to /dist/main.css
+ * This file only contains the WordPress theme header
+ */

@@ -1,0 +1,13 @@
+// Responsive Styles
+// =================
+
+@media (max-width: $breakpoint-md) {
+  .container {
+    padding: 0 $spacing-md;
+  }
+  
+  .posts-grid {
+    grid-template-columns: 1fr;
+    gap: $spacing-lg;
+  }
+}

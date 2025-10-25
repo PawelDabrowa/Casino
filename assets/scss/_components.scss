@@ -1,0 +1,145 @@
+// Component Styles
+// ================
+
+// ACF Content Areas
+.page-subtitle {
+  font-size: 1.1rem;
+  color: $text-light;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.post-excerpt {
+  font-size: 1.1rem;
+  color: $text-light;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: $bg-light;
+  border-left: 4px solid $primary-color;
+}
+
+.post-featured-video {
+  margin: 1.5rem 0;
+  
+  iframe {
+    width: 100%;
+    height: 400px;
+    border: none;
+    border-radius: $btn-border-radius;
+    
+    @media (max-width: $breakpoint-md) {
+      height: 250px;
+    }
+  }
+}
+
+
+// Posts Grid
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: $spacing-xl;
+  margin: $spacing-xl 0;
+}
+
+.post-card {
+  background: #fff;
+  border: 1px solid $border-color;
+  border-radius: $btn-border-radius;
+  overflow: hidden;
+  transition: $transition-base;
+  
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+}
+
+.post-thumbnail {
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+}
+
+.post-content {
+  padding: $spacing-lg;
+}
+
+.entry-title {
+  font-size: $font-size-lg;
+  margin-bottom: $spacing-sm;
+  
+  a {
+    color: $text-color;
+    text-decoration: none;
+    
+    &:hover {
+      color: $primary-color;
+      text-decoration: none;
+    }
+  }
+}
+
+.entry-meta {
+  color: $text-light;
+  font-size: $font-size-sm;
+  margin-bottom: $spacing-md;
+  
+  .posted-on,
+  .byline {
+    margin-right: $spacing-md;
+  }
+}
+
+.entry-summary {
+  margin-bottom: $spacing-lg;
+}
+
+.entry-footer {
+  margin-top: $spacing-lg;
+  padding-top: $spacing-md;
+  border-top: 1px solid $border-color;
+}
+
+// Buttons
+.c-btn {
+  display: inline-block;
+  padding: $btn-padding-y $btn-padding-x;
+  font-size: $btn-font-size;
+  line-height: $btn-line-height;
+  text-align: center;
+  text-decoration: none;
+  border: $btn-border-width solid transparent;
+  border-radius: $btn-border-radius;
+  cursor: pointer;
+  transition: $transition-base;
+  
+  &:hover {
+    text-decoration: none;
+  }
+  
+  &--primary {
+    color: #fff;
+    background-color: $primary-color;
+    border-color: $primary-color;
+    
+    &:hover {
+      background-color: color.adjust($primary-color, $lightness: -10%);
+      border-color: color.adjust($primary-color, $lightness: -10%);
+      color: #fff;
+    }
+  }
+  
+  &--secondary {
+    color: $text-color;
+    background-color: transparent;
+    border-color: $border-color;
+    
+    &:hover {
+      background-color: $bg-light;
+      color: $text-color;
+    }
+  }
+}

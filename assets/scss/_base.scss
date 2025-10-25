@@ -1,0 +1,50 @@
+// Base Styles
+// ===========
+
+// Reset and Base Styles
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+}
+
+body {
+  font-family: $font-family-base;
+  color: $text-color;
+  background-color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+// Typography
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-family-heading;
+  font-weight: 600;
+  line-height: $line-height-sm;
+  margin: 0 0 $spacing-md 0;
+}
+
+h1 { font-size: $font-size-xxl; }
+h2 { font-size: $font-size-xl; }
+h3 { font-size: $font-size-lg; }
+h4 { font-size: $font-size-base; }
+h5 { font-size: $font-size-sm; }
+h6 { font-size: $font-size-sm; }
+
+p {
+  margin: 0 0 $spacing-md 0;
+}
+
+a {
+  color: $primary-color;
+  text-decoration: none;
+  transition: $transition-base;
+  
+  &:hover {
+    color: color.adjust($primary-color, $lightness: -10%);
+    text-decoration: underline;
+  }
+}
