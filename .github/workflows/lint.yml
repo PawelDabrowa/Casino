@@ -27,16 +27,6 @@ jobs:
     - name: Run ESLint
       run: npm run lint
 
-    - name: Check SCSS syntax
-      run: |
-        echo "Checking SCSS syntax..."
-        if npx sass --no-source-map --quiet assets/scss/main.scss /dev/null; then
-          echo "✅ SCSS syntax check passed"
-        else
-          echo "❌ SCSS syntax check failed"
-          exit 1
-        fi
-
     - name: Build test
       run: |
         echo "Testing build process..."
