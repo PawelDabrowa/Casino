@@ -52,7 +52,7 @@ if (!empty($casino_hotels)) {
     <div class="table-header">
       <h2 class="table-heading"><?= esc_html($table_heading) ?></h2>
       <p class="table-date">
-        <img src="<?= get_template_directory_uri(); ?>/assets/images/uil_calender.svg" alt="Calendar" class="calendar-icon">
+        <img src="<?= get_template_directory_uri(); ?>/assets/images/uil_calender.svg" alt="Calendar" class="calendar-icon" loading="lazy">
         <?= esc_html($current_date) ?>
       </p>
       <?php if ($top_rated_sticker && $top_rated_sticker['show_sticker']): ?>
@@ -86,7 +86,7 @@ if (!empty($casino_hotels)) {
           <div class="hotel-info">
             <?php if ($hotel_logo): ?>
               <div class="hotel-logo">
-                <img src="<?= esc_url($hotel_logo['url']) ?>" alt="<?= esc_attr($hotel_logo['alt']) ?>">
+                <img src="<?= esc_url($hotel_logo['url']) ?>" alt="<?= esc_attr($hotel_logo['alt']) ?>" loading="lazy">
               </div>
             <?php endif; ?>
             

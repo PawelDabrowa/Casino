@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
+    "production": "webpack --mode production",
     "watch": "webpack --watch --mode development",
     "lint": "eslint assets/js && stylelint 'assets/scss/**/*.scss'"
   },

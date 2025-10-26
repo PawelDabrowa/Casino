@@ -29,6 +29,13 @@ $main_image = get_field('main_image_2');
 <?php if ($main_heading && $item_1_title && $main_image): ?>
 <section class="image-text-2">
   <div class="container">
+  <div class="image-text-2__header-desktop">
+          <?php if ($section_label): ?>
+            <span class="image-text-2__label"><?= esc_html($section_label) ?></span>
+          <?php endif; ?>
+          
+          <h2 class="image-text-2__heading"><?= esc_html($main_heading) ?></h2>
+        </div>
     <div class="image-text-2__grid">
       
       <!-- Text Content (Left Side) -->
@@ -89,7 +96,7 @@ $main_image = get_field('main_image_2');
       <div class="image-text-2__images">
         <?php if ($main_image): ?>
           <div class="image-text-2__main-image">
-            <img src="<?= esc_url($main_image['url']) ?>" alt="<?= esc_attr($main_image['alt']) ?>">
+            <img src="<?= esc_url($main_image['url']) ?>" alt="<?= esc_attr($main_image['alt']) ?>" loading="lazy">
           </div>
         <?php endif; ?>
       </div>

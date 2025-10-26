@@ -1,0 +1,136 @@
+name: Deploy
+
+env:
+  SSH_USER: ${{ secrets.DEPLOY_SSH_USER }}
+  SSH_HOST: ${{ secrets.DEPLOY_SSH_HOST }}
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy_cloudways:
+    name: Deploy to Cloudways
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+
+
+    - name: Install Node dependencies
+      run: npm ci
+
+
+    - name: Build assets
+      run: |
+        echo "Building casino theme assets..."
+        npm run build
+        echo "Build completed. Checking generated files:"
+        ls -la dist/
+        echo "CSS file size:"
+        wc -l dist/styles.*.css
+        echo "JS file size:"
+        wc -l dist/main.*.js
+        echo "First 10 lines of compiled CSS:"
+        head -10 dist/styles.*.css
+
+    - name: Configure SSH
+      run: |
+        mkdir -p ~/.ssh/
+        echo "$SSH_KEY" > ~/.ssh/deploy.key
+        chmod 600 ~/.ssh/deploy.key
+        cat >>~/.ssh/config <<END
+        Host cloudways
+          HostName $SSH_HOST
+          User $SSH_USER
+          IdentityFile ~/.ssh/deploy.key
+          StrictHostKeyChecking no
+        END
+      env:
+        SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+
+    - name: Set project name
+      run: echo "PROJECT_NAME=casino" >> $GITHUB_ENV
+
+    - name: Clean extended attributes
+      run: |
+        echo "Cleaning extended attributes from casino theme files..."
+        find . -name "*.php" -exec xattr -c {} \; 2>/dev/null || echo "No extended attributes to clean"
+        echo "Extended attributes cleaned"
+
+    - name: Send files
+      run: |
+        echo "Starting rsync deployment..."
+        rsync --delete -avO \
+          --exclude='.git' \
+          --exclude='.github' \
+          --exclude='node_modules' \
+          --exclude='*.log' \
+          --exclude='.DS_Store' \
+          --exclude='composer.json' \
+          --exclude='composer.lock' \
+          --exclude='vendor/' \
+          --exclude='.env*' \
+          --exclude='*.tmp' \
+          --exclude='*.swp' \
+          --exclude='*.bak' \
+          --exclude='.vscode/' \
+          --exclude='.idea/' \
+          --exclude='*.md' \
+          --exclude='README*' \
+          --exclude='LICENSE' \
+          --exclude='.gitignore' \
+          --exclude='.gitattributes' \
+          --exclude='phpcs.xml*' \
+          --exclude='prettier.config.js' \
+          --exclude='eslint.config.js' \
+          --exclude='postcss.config.js' \
+          --exclude='tailwind.config.js' \
+          --exclude='tailwind.css' \
+          --exclude='tailwind/' \
+          --exclude='javascript/' \
+          --exclude='node_scripts/' \
+          --exclude='package*.json' \
+          --exclude='generate-colors.js' \
+          --exclude='custom-styles.css' \
+          --exclude='DEPLOYMENT_SETUP.md' \
+          --no-xattrs \
+          --no-perms \
+          --no-owner \
+          --no-group \
+          --partial \
+          --ignore-errors \
+          ./ ${{ env.SSH_USER }}@${{ env.SSH_HOST }}:${{ env.DESTINATION }}/${{ env.PROJECT_NAME }}
+        echo "Rsync completed with exit code: $?"
+      env:
+        SSH_HOST: cloudways
+        DESTINATION: "~/public_html/wp-content/themes/"
+        PROJECT_TYPE: theme
+        PROJECT_NAME: ${{ env.PROJECT_NAME }}
+
+    - name: Flush WordPress caches
+      run: |
+        echo "Flushing WordPress caches (Cloudways + Breeze)..."
+        ssh -o StrictHostKeyChecking=no cloudways "
+          cd ~/public_html &&
+          echo 'Flushing Breeze cache...' &&
+          wp breeze purge --allow-root 2>/dev/null || echo 'Breeze cache not available' &&
+          echo 'Flushing object cache...' &&
+          wp cache flush --allow-root 2>/dev/null || echo 'Object cache not available' &&
+          echo 'Flushing rewrite rules...' &&
+          wp rewrite flush --allow-root 2>/dev/null || echo 'Rewrite flush not available' &&
+          echo 'Clearing transients...' &&
+          wp transient delete --all --allow-root 2>/dev/null || echo 'Transients not available' &&
+          echo 'Clearing Cloudways CDN cache...' &&
+          wp cloudways purge --allow-root 2>/dev/null || echo 'Cloudways CDN not available' &&
+          echo 'All caches flushed successfully!'
+        "
+
+        

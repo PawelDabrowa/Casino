@@ -16,14 +16,34 @@
     }
   }
   
-  &__header {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  &__header-desktop {
+    display: block;
+    text-align: center;
+    
+    .image-text-2__label {
+      text-align: center;
+      margin: 0 0 10px;
+    }
+    
+    .image-text-2__heading {
+      text-align: center;
+      margin: 0 0 50px;
+    }
     
     @media (width <= 768px) {
+      display: none; // Hide on mobile
+    }
+  }
+  
+  &__header {
+    display: none; // Hide on desktop
+    
+    @media (width <= 768px) {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
       order: 1; 
-      margin: 0 auto;// Header first on mobile
+      margin: 0 auto; // Header first on mobile
     }
   }
   

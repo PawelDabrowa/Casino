@@ -62,7 +62,7 @@ $main_image = get_field('main_image');
       <div class="image-text__images">
         <?php if ($main_image): ?>
           <div class="image-text__main-image">
-            <img src="<?= esc_url($main_image['url']) ?>" alt="<?= esc_attr($main_image['alt']) ?>">
+            <img src="<?= esc_url($main_image['url']) ?>" alt="<?= esc_attr($main_image['alt']) ?>" loading="lazy">
           </div>
         <?php endif; ?>
       </div>
