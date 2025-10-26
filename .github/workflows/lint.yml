@@ -30,11 +30,27 @@ jobs:
     - name: Check SCSS syntax
       run: |
         echo "Checking SCSS syntax..."
-        npx sass --check assets/scss/main.scss
-        echo "SCSS syntax check completed"
+        if npx sass --no-source-map --quiet assets/scss/main.scss /dev/null; then
+          echo "✅ SCSS syntax check passed"
+        else
+          echo "❌ SCSS syntax check failed"
+          exit 1
+        fi
 
     - name: Build test
       run: |
         echo "Testing build process..."
-        npm run build
-        echo "Build test completed successfully"
+        if npm run build; then
+          echo "✅ Build test passed"
+          echo "Generated files:"
+          ls -la dist/
+        else
+          echo "❌ Build test failed"
+          exit 1
+        fi
+
+    - name: Cleanup
+      run: |
+        echo "Cleaning up build artifacts..."
+        rm -rf dist/
+        echo "✅ Cleanup completed"
