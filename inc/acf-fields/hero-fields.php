@@ -134,16 +134,9 @@ if (function_exists('acf_add_local_field_group')) {
         'location' => array(
             array(
                 array(
-                    'param' => 'page_template',
+                    'param' => 'page_type',
                     'operator' => '==',
-                    'value' => 'default',
-                ),
-            ),
-            array(
-                array(
-                    'param' => 'post_type',
-                    'operator' => '==',
-                    'value' => 'page',
+                    'value' => 'front_page',
                 ),
             ),
         ),

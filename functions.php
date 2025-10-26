@@ -28,17 +28,19 @@ require get_template_directory() . '/inc/cpt/casino-hotels.php';
 add_filter('use_block_editor_for_post', '__return_false', 10);
 add_filter('use_block_editor_for_post_type', '__return_false', 10);
 
-// Remove Classic Editor support
+// Remove Classic Editor support for posts only (keep pages with editor)
 add_action('init', function() {
-    remove_post_type_support('page', 'editor');
     remove_post_type_support('post', 'editor');
 });
 
-// Hide editor tabs in admin (but allow ACF WYSIWYG fields)
+// Hide editor tabs in admin (but allow ACF WYSIWYG fields and page editor)
 add_action('admin_head', function() {
     echo '<style>
-        #postdivrich, #postdivrich #wp-content-editor-container, 
-        .wp-editor-tabs { display: none !important; }
+        /* Hide editor for posts only */
+        .post-type-post #postdivrich, 
+        .post-type-post #postdivrich #wp-content-editor-container, 
+        .post-type-post .wp-editor-tabs { display: none !important; }
+        
         .acf-field { margin-top: 20px; }
         /* Allow ACF WYSIWYG fields to work */
         .acf-field .wp-editor-wrap { display: block !important; }
@@ -138,3 +140,15 @@ function casino_lazy_load_avatar($avatar) {
     return $avatar;
 }
 add_filter('get_avatar', 'casino_lazy_load_avatar');
+
+/**
+ * Footer fallback menu
+ */
+function casino_footer_fallback_menu() {
+    echo '<ul class="footer-menu">';
+    echo '<li><a href="#">Reviews</a></li>';
+    echo '<li><a href="#">About us</a></li>';
+    echo '<li><a href="#">Terms & Conditions</a></li>';
+    echo '<li><a href="#">Privacy Policy</a></li>';
+    echo '</ul>';
+}

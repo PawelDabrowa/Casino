@@ -1,0 +1,290 @@
+// Footer Component
+// ================
+
+.site-footer {
+    background-color: #101010;
+    color: #fff;
+    padding: 60px 0 40px;
+    text-align: center;
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .footer-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+
+    // Logo Section
+    .footer-logo {
+        margin-bottom: 20px;
+
+        .footer-logo-custom {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+
+            .logo-icon {
+                .crown-icon {
+                    position: relative;
+                    width: 80px;
+                    height: 60px;
+                    background: linear-gradient(135deg, #ff6b9d, #c44569);
+                    border-radius: 8px 8px 0 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin: 0 auto;
+
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        top: -10px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        width: 0;
+                        height: 0;
+                        border-left: 40px solid transparent;
+                        border-right: 40px solid transparent;
+                        border-bottom: 20px solid #ff6b9d;
+                    }
+
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        top: -5px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        width: 0;
+                        height: 0;
+                        border-left: 35px solid transparent;
+                        border-right: 35px solid transparent;
+                        border-bottom: 15px solid #ff6b9d;
+                    }
+
+                    .hexagon {
+                        background-color: #000;
+                        color: #fff;
+                        padding: 8px 12px;
+                        border-radius: 4px;
+                        font-weight: bold;
+                        font-size: 12px;
+                        z-index: 2;
+                        position: relative;
+                    }
+                }
+            }
+
+            .logo-text {
+                text-align: center;
+
+                h2 {
+                    color: #fff;
+                    font-size: 28px;
+                    font-weight: bold;
+                    margin: 0 0 5px 0;
+                    line-height: 1.2;
+                }
+
+                span {
+                    color: #ccc;
+                    font-size: 16px;
+                    font-weight: 300;
+                }
+            }
+        }
+
+        // WordPress custom logo styling
+        .custom-logo {
+            max-height: 90px;
+            width: auto;
+        }
+    }
+
+    // Navigation Menu
+    .footer-navigation {
+        .footer-menu {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            flex-wrap: nowrap;
+
+            li {
+                margin: 0;
+
+                a {
+                    color: #fff;
+                    text-decoration: none;
+                    font-size: 16px;
+                    font-weight: 400;
+                    transition: color 0.3s ease;
+
+                    &:hover {
+                        color: #ff6b9d;
+                    }
+                }
+            }
+        }
+    }
+
+    // Separator Line
+    .footer-separator {
+        width: 100%;
+        height: 1px;
+        background-color: #fff;
+        margin: 20px 0;
+    }
+
+    // Responsible Gambling Section
+    .footer-gambling {
+        .gambling-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+
+            .gambling-icon {
+                height: 32px;
+                width: auto;
+            }
+
+            .age-icon {
+                width: 40px;
+                height: 40px;
+                border: 2px solid #fff;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #fff;
+                font-weight: bold;
+                font-size: 14px;
+            }
+        }
+    }
+
+    // Copyright Section
+    .footer-copyright {
+        p {
+            color: #939393;
+            font-size: 16px;
+            margin: 0;
+            font-weight: 400;
+        }
+    }
+}
+
+// Responsive Design
+@media (width <= 768px) {
+    .site-footer {
+        padding: 40px 0 30px;
+
+        .footer-content {
+            gap: 25px;
+        }
+
+        .footer-logo {
+          margin-bottom: 0;
+          
+            .footer-logo-custom {
+                .logo-text {
+                    h2 {
+                        font-size: 24px;
+                    }
+
+                    span {
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+
+        .footer-navigation {
+            .footer-menu {
+                gap: 20px;
+                flex-direction: column;
+                flex-wrap: nowrap;
+
+                li a {
+                    font-size: 14px;
+                }
+            }
+        }
+
+        .footer-gambling {
+            .gambling-info {
+                flex-direction: column;
+                gap: 10px;
+
+            .gambling-icon {
+                height: 20px;
+            }
+
+                .age-icon {
+                    width: 35px;
+                    height: 35px;
+                    font-size: 12px;
+                }
+            }
+        }
+
+        .footer-copyright {
+            p {
+                font-size: 12px;
+            }
+        }
+    }
+}
+
+@media (width <= 480px) {
+    .site-footer {
+        .footer-logo {
+            .footer-logo-custom {
+                .logo-icon {
+                    .crown-icon {
+                        width: 60px;
+                        height: 45px;
+
+                        &::before {
+                            border-left: 30px solid transparent;
+                            border-right: 30px solid transparent;
+                            border-bottom: 15px solid #ff6b9d;
+                        }
+
+                        &::after {
+                            border-left: 25px solid transparent;
+                            border-right: 25px solid transparent;
+                            border-bottom: 12px solid #ff6b9d;
+                        }
+
+                        .hexagon {
+                            padding: 6px 8px;
+                            font-size: 10px;
+                        }
+                    }
+                }
+
+                .logo-text {
+                    h2 {
+                        font-size: 20px;
+                    }
+
+                    span {
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+    }
+}

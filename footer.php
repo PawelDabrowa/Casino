@@ -16,44 +16,26 @@ if (!defined('ABSPATH')) {
     <footer id="colophon" class="site-footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-info">
-                    <div class="site-info">
-                        <?php 
-                        $footer_text = get_field('footer_text', 'option');
-                        if ($footer_text) {
-                            echo wp_kses_post($footer_text);
-                        } else {
-                            ?>
-                            <p>&copy; <?php echo date('Y'); ?> <?php bloginfo('name'); ?>. <?php esc_html_e('All rights reserved.', 'casino'); ?></p>
-                            <?php
-                        }
-                        ?>
-                    </div>
-                    
-                    <?php
-                    // Footer contact info
-                    $footer_phone = get_field('footer_phone', 'option');
-                    $footer_email = get_field('footer_email', 'option');
-                    $footer_address = get_field('footer_address', 'option');
-                    ?>
-                    
-                    <?php if ($footer_phone || $footer_email || $footer_address) : ?>
-                        <div class="footer-contact">
-                            <?php if ($footer_phone) : ?>
-                                <p><strong><?php esc_html_e('Phone:', 'casino'); ?></strong> <a href="tel:<?php echo esc_attr($footer_phone); ?>"><?php echo esc_html($footer_phone); ?></a></p>
-                            <?php endif; ?>
-                            
-                            <?php if ($footer_email) : ?>
-                                <p><strong><?php esc_html_e('Email:', 'casino'); ?></strong> <a href="mailto:<?php echo esc_attr($footer_email); ?>"><?php echo esc_html($footer_email); ?></a></p>
-                            <?php endif; ?>
-                            
-                            <?php if ($footer_address) : ?>
-                                <p><strong><?php esc_html_e('Address:', 'casino'); ?></strong> <?php echo esc_html($footer_address); ?></p>
-                            <?php endif; ?>
+                <!-- Logo Section -->
+                <div class="footer-logo">
+                    <?php if (has_custom_logo()) : ?>
+                        <?php the_custom_logo(); ?>
+                    <?php else : ?>
+                        <div class="footer-logo-custom">
+                            <div class="logo-icon">
+                                <div class="crown-icon">
+                                    <div class="hexagon">TOP 10</div>
+                                </div>
+                            </div>
+                            <div class="logo-text">
+                                <h2>Casino Hotels</h2>
+                                <span>Worldwide</span>
+                            </div>
                         </div>
                     <?php endif; ?>
                 </div>
-                
+
+                <!-- Navigation Menu -->
                 <div class="footer-navigation">
                     <?php
                     wp_nav_menu(array(
@@ -61,9 +43,24 @@ if (!defined('ABSPATH')) {
                         'menu_class'     => 'footer-menu',
                         'container'      => false,
                         'depth'          => 1,
-                        'fallback_cb'    => false,
+                        'fallback_cb'    => 'casino_footer_fallback_menu',
                     ));
                     ?>
+                </div>
+
+                <!-- Separator Line -->
+                <div class="footer-separator"></div>
+
+                <!-- Responsible Gambling Section -->
+                <div class="footer-gambling">
+                    <div class="gambling-info">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/gamble.svg" alt="BeGambleAware.org" class="gambling-icon">
+                    </div>
+                </div>
+
+                <!-- Copyright Section -->
+                <div class="footer-copyright">
+                    <p>&copy; 2022 Top 10 Casinos Worldwide. All rights reserved.</p>
                 </div>
             </div>
         </div>

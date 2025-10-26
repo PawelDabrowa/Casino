@@ -20,6 +20,7 @@ function casino_load_acf_fields() {
     $field_files = array(
         'hero-fields.php',
         'image-text-fields.php',
+        'image-text-2-fields.php',
         'casino-hotel-fields.php',
         'table-section-fields.php',
     );

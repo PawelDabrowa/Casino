@@ -18,6 +18,15 @@ if (function_exists('acf_add_local_field_group')) {
         'key' => 'group_image_text_component',
         'title' => 'Image Text Component',
         'fields' => array(
+            // Tab: Header
+            array(
+                'key' => 'field_tab_header',
+                'label' => 'Header',
+                'name' => '',
+                'type' => 'tab',
+                'placement' => 'top',
+                'endpoint' => 0,
+            ),
             // Section Label
             array(
                 'key' => 'field_section_label',
@@ -44,19 +53,6 @@ if (function_exists('acf_add_local_field_group')) {
                     'width' => '50',
                 ),
             ),
-            // Content
-            array(
-                'key' => 'field_content_wysiwyg',
-                'label' => 'Content',
-                'name' => 'content_wysiwyg',
-                'type' => 'wysiwyg',
-                'instructions' => 'Main content text',
-                'required' => 1,
-                'tabs' => 'all',
-                'toolbar' => 'full',
-                'media_upload' => 1,
-                'delay' => 0,
-            ),
             // Button Text
             array(
                 'key' => 'field_button_text',
@@ -82,20 +78,36 @@ if (function_exists('acf_add_local_field_group')) {
                     'width' => '50',
                 ),
             ),
-            // Image Position
+            // Tab: Content
             array(
-                'key' => 'field_image_position',
-                'label' => 'Image Position',
-                'name' => 'image_position',
-                'type' => 'radio',
-                'instructions' => 'Choose image position',
+                'key' => 'field_tab_content',
+                'label' => 'Content',
+                'name' => '',
+                'type' => 'tab',
+                'placement' => 'top',
+                'endpoint' => 0,
+            ),
+            // Content
+            array(
+                'key' => 'field_content_wysiwyg',
+                'label' => 'Content',
+                'name' => 'content_wysiwyg',
+                'type' => 'wysiwyg',
+                'instructions' => 'Main content text',
                 'required' => 1,
-                'choices' => array(
-                    'left' => 'Left (Text on Right)',
-                    'right' => 'Right (Text on Left)',
-                ),
-                'layout' => 'horizontal',
-                'default_value' => 'right',
+                'tabs' => 'all',
+                'toolbar' => 'full',
+                'media_upload' => 1,
+                'delay' => 0,
+            ),
+            // Tab: Image
+            array(
+                'key' => 'field_tab_image',
+                'label' => 'Image',
+                'name' => '',
+                'type' => 'tab',
+                'placement' => 'top',
+                'endpoint' => 0,
             ),
             // Main Image
             array(
@@ -108,39 +120,14 @@ if (function_exists('acf_add_local_field_group')) {
                 'return_format' => 'array',
                 'preview_size' => 'medium',
                 'library' => 'all',
-                'wrapper' => array(
-                    'width' => '50',
-                ),
-            ),
-            // Overlay Image
-            array(
-                'key' => 'field_overlay_image',
-                'label' => 'Overlay Image',
-                'name' => 'overlay_image',
-                'type' => 'image',
-                'instructions' => 'Smaller overlapping image',
-                'required' => 0,
-                'return_format' => 'array',
-                'preview_size' => 'medium',
-                'library' => 'all',
-                'wrapper' => array(
-                    'width' => '50',
-                ),
             ),
         ),
         'location' => array(
             array(
                 array(
-                    'param' => 'post_type',
+                    'param' => 'page_type',
                     'operator' => '==',
-                    'value' => 'page',
-                ),
-            ),
-            array(
-                array(
-                    'param' => 'post_type',
-                    'operator' => '==',
-                    'value' => 'post',
+                    'value' => 'front_page',
                 ),
             ),
         ),
